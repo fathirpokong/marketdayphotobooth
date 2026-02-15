@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photobooth Studio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
@@ -21,38 +22,33 @@
         <div class="package-item" onclick="selectPkg('Paket A', 5000, this)">
             <span class="p-name">Paket A</span>
             <span class="p-price">5k</span>
-            <span class="p-desc">2x jepretan + 1 foto print (4R)</span>
+            <span class="p-desc">2x jepretan + 1 foto print + file (4R)</span>
         </div>
-        <div class="package-item popular" onclick="selectPkg('Paket B', 8000, this)">
-            <div class="badge">POPULER</div>
+        <div class="package-item" onclick="selectPkg('Paket B', 8000, this)">
             <span class="p-name">Paket B</span>
             <span class="p-price">8k</span>
             <span class="p-desc">3x jepretan + 1 foto print + 2 file (6R)</span>
         </div>
-        <div class="package-item" onclick="selectPkg('Paket C', 10000, this)">
+        <div class="package-item best-seller" onclick="selectPkg('Paket C', 10000, this)">
+            <span class="badge-populer">BEST SELLER</span>
             <span class="p-name">Paket C</span>
             <span class="p-price">10k</span>
             <span class="p-desc">5x jepretan + 2 foto print + 3 file (10R)</span>
         </div>
     </div>
 
-    <div class="form-container" id="orderForm">
+    <div class="form-container">
         <div class="form-group">
             <label>Nama Lengkap</label>
-            <input type="text" id="nama" placeholder="Nama kamu">
+            <input type="text" id="nama" placeholder="Masukkan nama kamu">
         </div>
 
         <div class="form-group">
-            <label>Nomor WhatsApp</label>
-            <input type="tel" id="telepon" placeholder="08xxxxxxxxx">
-        </div>
-
-        <div class="form-group">
-            <label>Metode Kirim File</label>
-            <select id="metode" onchange="toggleEmail()">
-                <option value="WhatsApp">WhatsApp</option>
-                <option value="Email">Email (Google Drive)</option>
+            <label>Metode Pengiriman File</label>
+            <select id="metode" onchange="updateInputMetode()">
                 <option value="Flashdisk">Flashdisk</option>
+                <option value="Email">Email (Google Drive)</option>
+                <option value="WhatsApp">WhatsApp</option>
             </select>
         </div>
 
@@ -61,24 +57,32 @@
             <input type="email" id="email" placeholder="contoh@gmail.com">
         </div>
 
+        <div class="form-group" id="inputWABox" style="display: none;">
+            <label>Nomor WhatsApp</label>
+            <input type="number" id="whatsapp" placeholder="0812xxxxxxxx">
+        </div>
+
         <input type="hidden" id="selectedPackage" value="">
+        <input type="hidden" id="selectedPrice" value="0">
+        
         <button id="btnOrder" onclick="kirimData()">Booking Sekarang</button>
     </div>
 
     <div id="strukArea" style="display: none;">
-        <div class="struk-card">
-            <div class="struk-header">STRUK BOOKING</div>
-            <div id="strukContent"></div>
-            <p class="struk-note">Screenshot & bayar di Kasir</p>
-            <button onclick="location.reload()" class="btn-back">Buat Order Baru</button>
-        </div>
+        <div class="struk-header">STRUK DIGITAL PHOTOBOOTH</div>
+        <div class="struk-body" id="strukContent"></div>
+        <p class="struk-footer">Screenshot struk ini dan tunjukkan ke Resepsionis untuk pembayaran.</p>
+        <button onclick="location.reload()" style="background: #64748b; margin-top: 10px;">Order Lagi</button>
     </div>
 
-    <footer class="footer">
+    <footer class="footer-pembeli">
         Dikelola oleh: Zaqlyn, Fathir, Aiedi <br>
-        <span class="maker">"Yang Buat Web Fathir"</span>
+        PJ: Muhammad Reval | Marketing: Yuan <br>
+        <span class="maker-tag">"Yang Buat Web Fathir"</span>
     </footer>
 </div>
+
+<div class="watermark-float">© 2026 MumuBlue Studio</div>
 
 <script src="script.js"></script>
 </body>
