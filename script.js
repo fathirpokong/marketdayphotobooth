@@ -1,4 +1,4 @@
-const url = "https://script.google.com/macros/s/AKfycbzB7lk-wCZx7nasMklNLh1lcc1U_i-rHiHDMOFmOPdPpFBV-HvxTBRYX-mDYqP7hwoW7g/exec";
+const url = "https://script.google.com/macros/s/AKfycbzKI8A0mHwtLiocHINEiRotVzsmBlKCeuf9USuMHON-9sluRrd5u4a3uIGpb0HxzCDuHA/exec";
 
 function updateInputMetode() {
     const metode = document.getElementById('metode').value;
@@ -66,4 +66,5 @@ function kirimData() {
         `;
     });
 }
+
 
