@@ -1,9 +1,18 @@
-const url = "https://script.google.com/macros/s/AKfycbzKI8A0mHwtLiocHINEiRotVzsmBlKCeuf9USuMHON-9sluRrd5u4a3uIGpb0HxzCDuHA/exec";
+const url = "https://script.google.com/macros/s/AKfycbwKdfwftlqefkK8iSH_zSFN83fBGdTlIFeFWoL0eIca-AzUscdnNVSeBAI-CydooFwTAw/exec";
 
-function updateInputMetode() {
+function toggleKontak() {
     const metode = document.getElementById('metode').value;
-    document.getElementById('inputEmailBox').style.display = (metode === 'Email') ? 'block' : 'none';
-    document.getElementById('inputWABox').style.display = (metode === 'WhatsApp') ? 'block' : 'none';
+    const box = document.getElementById('inputKontakBox');
+    const label = document.getElementById('labelKontak');
+    const input = document.getElementById('kontak');
+
+    if (metode === 'Flashdisk') {
+        box.style.display = 'none';
+    } else {
+        box.style.display = 'block';
+        label.innerText = (metode === 'WhatsApp') ? 'Nomor WhatsApp' : 'Alamat Email';
+        input.placeholder = (metode === 'WhatsApp') ? '0812...' : 'contoh@gmail.com';
+    }
 }
 
 function selectPkg(val, price, el) {
@@ -16,21 +25,12 @@ function selectPkg(val, price, el) {
 function kirimData() {
     const nama = document.getElementById('nama').value;
     const paket = document.getElementById('selectedPackage').value;
+    const cetak = document.getElementById('opsiCetak').value;
     const metode = document.getElementById('metode').value;
-    const email = document.getElementById('email').value || "-";
-    const wa = document.getElementById('whatsapp').value || "-";
+    const kontak = document.getElementById('kontak').value || "-";
     const btn = document.getElementById('btnOrder');
 
-    if(!nama || !paket) { 
-        alert("Isi nama dan pilih paket dulu!"); 
-        return; 
-    }
-
-    // Validasi khusus WhatsApp
-    if(metode === 'WhatsApp' && wa === "-") {
-        alert("Harap isi nomor WhatsApp kamu!");
-        return;
-    }
+    if(!nama || !paket) { alert("Isi nama dan pilih paket dulu!"); return; }
 
     btn.disabled = true;
     btn.innerText = "⏳ Memproses...";
@@ -38,33 +38,21 @@ function kirimData() {
     fetch(url, {
         method: "POST",
         mode: "no-cors",
-        body: JSON.stringify({ action: "tambah", nama, paket, metode, email, wa }),
+        body: JSON.stringify({ action: "tambah", nama, paket, cetak, metode, kontak }),
         headers: { "Content-Type": "text/plain" }
     })
     .then(() => {
         confetti({ borderRadius: 10, particleCount: 150, spread: 70, origin: { y: 0.6 } });
         document.querySelectorAll('.package-list, .form-container, .header p').forEach(el => el.style.display = 'none');
-        
-        const strukArea = document.getElementById('strukArea');
-        const strukContent = document.getElementById('strukContent');
-        
-        strukArea.style.display = 'block';
-        
-        // Tampilkan info kontak sesuai metode yang dipilih
-        let kontakInfo = (metode === 'WhatsApp') ? `WA       : ${wa}` : `EMAIL    : ${email}`;
-        if(metode === 'Flashdisk') kontakInfo = `INFO     : Pakai Flashdisk`;
-
-        strukContent.innerHTML = `
+        document.getElementById('strukArea').style.display = 'block';
+        document.getElementById('strukContent').innerHTML = `
             ---------------------------<br>
-            ORDER ID : #MB-${Math.floor(Math.random() * 9000) + 1000}<br>
             NAMA     : ${nama.toUpperCase()}<br>
             PAKET    : ${paket}<br>
-            METODE   : ${metode}<br>
-            ${kontakInfo}<br>
-            STATUS   : MENUNGGU PEMBAYARAN<br>
+            CETAK    : ${cetak}<br>
+            KIRIM VIA: ${metode}<br>
+            KONTAK   : ${kontak}<br>
             ---------------------------
         `;
     });
 }
-
-
