@@ -22,18 +22,18 @@
         <div class="package-item" onclick="selectPkg('Paket A', 5000, this)">
             <span class="p-name">Paket A</span>
             <span class="p-price">5k</span>
-            <span class="p-desc">3x jepretan + 2 foto file</span>
+            <span class="p-desc">2x jepretan + 1 foto print + file (4R)</span>
         </div>
         <div class="package-item" onclick="selectPkg('Paket B', 8000, this)">
             <span class="p-name">Paket B</span>
             <span class="p-price">8k</span>
-            <span class="p-desc">4x jepretan + 1 foto 3 file</span>
+            <span class="p-desc">3x jepretan + 1 foto print + 2 file (6R)</span>
         </div>
         <div class="package-item best-seller" onclick="selectPkg('Paket C', 10000, this)">
             <span class="badge-populer">BEST SELLER</span>
             <span class="p-name">Paket C</span>
             <span class="p-price">10k</span>
-            <span class="p-desc">7x jepretan + 2 foto 5 file</span>
+            <span class="p-desc">5x jepretan + 2 foto print + 3 file (10R)</span>
         </div>
     </div>
 
@@ -42,33 +42,28 @@
             <label>Nama Lengkap</label>
             <input type="text" id="nama" placeholder="Masukkan nama kamu">
         </div>
-    
+
         <div class="form-group">
-            <label>Metode Pengiriman File</label>
-            <select id="metode" onchange="updateInputMetode()">
-                <option value="Flashdisk">Flashdisk</option>
-                <option value="Email">Email (Google Drive)</option>
-                <option value="WhatsApp">WhatsApp</option>
+            <label>Opsi Cetak Foto?</label>
+            <select id="opsiCetak">
+                <option value="Ya, Mau Dicetak">Ya, Mau Dicetak</option>
+                <option value="Tidak (File Saja)">Tidak, File Saja</option>
             </select>
         </div>
 
-        <div class="form-group" id="inputEmailBox" style="display: none;">
-            <label>Alamat Email</label>
-            <input type="email" id="email" placeholder="contoh@gmail.com">
+        <div class="form-group">
+            <label>Metode Pengiriman File</label>
+            <select id="metode" onchange="toggleKontak()">
+                <option value="Flashdisk">Flashdisk</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Email">Email (Google Drive)</option>
+            </select>
         </div>
 
-        <div class="form-group" id="inputWABox" style="display: none;">
-            <label>Nomor WhatsApp</label>
-            <input type="number" id="whatsapp" placeholder="0812xxxxxxxx">
+        <div class="form-group" id="inputKontakBox" style="display: none;">
+            <label id="labelKontak">Detail Kontak</label>
+            <input type="text" id="kontak" placeholder="...">
         </div>
-        
-        <div class="form-group">
-            <label>Ingin Cetak Foto?</label>
-            <select id="cetakFoto">
-            <option value="Ya">Ya (Cetak Fisik)</option>
-            <option value="Tidak">Tidak (File Saja)</option>
-        </select>
-    </div>
 
         <input type="hidden" id="selectedPackage" value="">
         <input type="hidden" id="selectedPrice" value="0">
@@ -80,7 +75,7 @@
         <div class="struk-header">STRUK DIGITAL PHOTOBOOTH</div>
         <div class="struk-body" id="strukContent"></div>
         <p class="struk-footer">Screenshot struk ini dan tunjukkan ke Resepsionis untuk pembayaran.</p>
-        <button onclick="location.reload()" style="background: #64748b; margin-top: 10px;">Order Lagi</button>
+        <button onclick="location.reload()" class="btn-reload">Order Lagi</button>
     </div>
 
     <footer class="footer-pembeli">
@@ -90,9 +85,6 @@
     </footer>
 </div>
 
-<div class="watermark-float">© 2026 MumuBlue Studio</div>
-
 <script src="script.js"></script>
 </body>
 </html>
-
